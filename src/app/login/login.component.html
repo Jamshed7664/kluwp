@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8 col-sm-12 col-12 col-xl-8 col-md-8">
+      <div class="left-container text-center">
+      <img src="../../assets/img/2. Kluwp final logo_vector (1).png" style="width: 331px;" class=" img-fluid mt-5 " alt="">
+      <p class="para-text mt-4" >KLUWP Secure Payment Solution</p>
+      <img src="../../assets/img/Group 17942.png" class=" img-fluid mt-2 " alt="">
+
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-12 col-12 col-xl-4 col-md-4 pl-5 pt-5">
+      <h2 class="login-text">Login</h2>
+      <p class="login-para mt-2">Login with your data that you have been provided with.</p>
+      <form class="mt-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group ">
+          <label for="">Enter Username</label>
+          <input [type]="inputType ? 'password' : 'text'" formControlName="email" class="form-control mt-1">
+          <i class="fas fa-eye eye-close" (click)="showUser()" *ngIf="inputType"></i>
+          <i class="fas fa-eye-slash eye-slash-first" (click)="showUser()" *ngIf="!inputType"></i>
+
+        </div>
+        <div class="form-group mt-4">
+          <label for="">Enter Password</label>
+          <input [type]="inputTypePass ? 'password' : 'text'"  formControlName="password"  class="form-control mt-1">
+          <i class="fas fa-eye eye-close" (click)="showPassword()" *ngIf="inputTypePass"></i>
+          <i class="fas fa-eye-slash eye-slash-first" (click)="showPassword()" *ngIf="!inputTypePass"></i>
+        </div>
+        <div class="custom-control custom-checkbox my-3 ml-4">
+          <input type="checkbox" class="custom-control-input" id="customControlInline">
+          <label class="custom-control-label" for="customControlInline">Remember Me</label>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
+       <div class="col-12 mt-3">
+        <div class="d-flex justify-content-between " style="width: 90%;">
+          <p><u>Forgot Username?</u></p>
+          <p ><u>Forgot Password?</u></p>
+       </div>
+       </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+

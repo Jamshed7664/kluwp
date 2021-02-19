@@ -1,0 +1,104 @@
+<div class="myNav">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 text-center">
+    <button class="filterBtn ml-2 mt-2 ngx-daterangepicker-action left"  (click)="openDatepicker()" type="button">
+      <i class="fas fa-filter"></i> Filter
+    </button>
+      </div>
+      <div class="col-lg-7 col-sm-12 text-center">
+        <form >
+          <i class="fas fa-search"></i>
+          <input type="text"  [(ngModel)]="term" name="term" class="searchinput " placeholder="Enter data to search beneficiaries...">
+        </form>
+      </div>
+      <div class="col-lg-2 col-sm-12 text-center">
+        <img src="../../../assets/img/pdf.png" width="76" height="40" class="" alt="">
+        <img src="../../../assets/img/csv.png" class="" alt="" style="width: 39px; object-fit: contain;">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="limiter mt-3">
+  <form>
+    <div class="form-group">
+      <input  type="text" placement="top" class="ml-5" class="calender-input" name="daterange" ngxDaterangepickerMd (change)="omDate(selected)" [(ngModel)]="selected"/>
+    </div>
+   </form>
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100 ver1 m-b-110">
+        <div class="table100-head">
+          <table>
+            <thead>
+              <tr class="row100 head">
+                <th class="cell100 column1">Full name</th>
+                <th class="cell100 column3"><span class="ml-5 ">Payout Sent on</span></th>
+                <th class="cell100 column5"><span class="ml-5">Amount</span></th>
+                <th class="cell100 column6">Processed?</th>
+                <th class="cell100 column7">Reconciled?</th>
+                <th class="cell100 column7">Go to Profile</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div class="table100-body js-pscroll">
+          <table>
+            <tbody>
+              <tr class="row100 body" *ngFor="let item of myData | filter:term | paginate: config; index as i">
+                <ng-container *ngIf="i < total">
+                  <td class="cell100 column1"><span class="mr-1">{{item.name}}</span></td>
+                  <td class="cell100 column1"><span class="mr-4">{{item.PayoutSenton}}</span></td>
+                  <td class="cell100 column1">{{item.Amount}}</td>
+                  <td class="cell100 column1">
+                      <input type="checkbox" [checked]="item.Processed" class="custom-control ml-4" id="customCheck" [name]="i" style="zoom: 1.4;">
+                  </td>
+                  <td class="cell100 column1">
+
+                      <input type="radio" [checked]="item.Reconciled" id="customControlValidation2" class="mr-2" [name]="i" style="zoom: 1.4;">
+
+                  </td>
+                  <td class="cell100 column1">{{item.GotoProfile}}</td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mb-3">
+  <div class="row text-center  para-text mb-3">
+    <div class="col-lg-4 col-sm-4 col-4 col-md-4">
+      <label for="cars">Rows per page :</label>
+      <select name="cars" class="rowPer" (change)="onSelect($event)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="15">20</option>
+        <option [value]="myData.length">All</option>
+      </select>
+    </div>
+    <div class="col-lg-3 col-sm- col-3 col-md-3">
+     <p>1-{{currentPage}} of {{totalLength}}</p>
+    </div>
+    <div class="col-lg-5 col-sm-5 col-5 col-md-5">
+      <pagination-controls
+      [maxSize]="maxSize"
+      [directionLinks]="directionLinks"
+      [autoHide]="autoHide"
+      [responsive]="responsive"
+      [previousLabel]="labels.previousLabel"
+      [nextLabel]="labels.nextLabel"
+      [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+      [screenReaderPageLabel]="labels.screenReaderPageLabel"
+      [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+      (pageChange)="onPageChange($event)"
+      ></pagination-controls>
+     </div>
+  </div>
+</div>
+

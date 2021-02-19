@@ -1,0 +1,54 @@
+<div class="d-flex" id="wrapper">
+
+  <!-- Sidebar -->
+  <div class="border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">
+      <img src="../../../assets/img/2. Kluwp final logo_vector (1).png" width="230" alt="" class="img-fluid mt-4">
+       </div>
+    <div class="list-group list-group-flush mt-5">
+      <a  class="list-group-item list-group-item-action "  [routerLinkActive]="['myactive']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/dashboard/payoutsSent']" (click)="getRouteName('Payouts Sent')" ><img [src]="routeName != 'Payouts Sent' ? '../../../assets/sidebaricon/colo-icon (3).png' : '../../../assets/sidebaricon/white-icon (1).png'" width="20" height="20" alt=""> &nbsp; Payouts Sent</a>
+      <a class="list-group-item list-group-item-action " [routerLinkActive]="['myactive']" [routerLink]="['/dashboard/beneficiaries']" routerLinkActive="router-link-active" (click)="getRouteName('Beneficiaries')" ><img [src]="routeName != 'Beneficiaries' ? '../../../assets/sidebaricon/colo-icon (1).png' : '../../../assets/sidebaricon/white-icon (2).png'" width="20" height="20" alt=""> &nbsp; Beneficiaries</a>
+      <a  class="list-group-item list-group-item-action " [routerLinkActive]="['myactive']" [routerLink]="['/dashboard/financialTransactions']" routerLinkActive="router-link-active" (click)="getRouteName('Financial Transactions')"><img [src]="routeName != 'Financial Transactions' ? '../../../assets/sidebaricon/colo-icon (2).png' : '../../../assets/sidebaricon/white-icon (3).png'" width="20" height="20" alt=""> &nbsp; Financial Transactions</a>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+
+    <nav class="navbar navbar-expand-lg  border-bottom" >
+      <i class="fas fa-align-justify mr-2 mb-1"  id="menu-toggle"></i>
+      <h5>{{routeName}}</h5>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link"  style="font-size: 20px;"><i class="fas fa-bell mr-4 mt-1"></i></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" ><img src="../../../assets/img/user.png" width="30" height="30" alt="" class="img-fluid"></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Merchant Panel Backoffice
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" (click)="logout()" style="cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+   <router-outlet></router-outlet>
+    </div>
+  </div>
+
+
+</div>
+

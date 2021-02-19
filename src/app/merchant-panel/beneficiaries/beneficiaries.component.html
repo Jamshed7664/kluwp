@@ -1,0 +1,80 @@
+<div class="myNav">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-5 col-sm-12 text-center">
+
+    <form >
+      <i class="fas fa-search"></i>
+      <input type="text" [(ngModel)]="term" name="term" class="searchinput" placeholder="Enter data to search beneficiaries...">
+    </form>
+      </div>
+      <div class="col-lg-5 col-sm-12 text-center">
+
+      </div>
+      <div class="col-lg-2 col-sm-12 text-center">
+        <img src="../../../assets/img/pdf.png" width="76" height="40" class="" alt="">
+        <img src="../../../assets/img/csv.png" class="" alt="" style="width: 39px; object-fit: contain;">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="limiter mt-3">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100 ver1 m-b-110">
+        <div class="table100-head">
+          <table>
+            <thead>
+              <tr class="row100 head">
+                <th class="cell100 column1">Full name</th>
+                <th class="cell100 column3"><span class="ml-5">City</span></th>
+                <th class="cell100 column5"><span class="ml-4">Country</span></th>
+                <th class="cell100 column6">Email</th>
+                <th class="cell100 column7"><span class="ml-5">IBN</span></th>
+                <th class="cell100 column8"><span class="ml-5">SWIFT/BIC</span></th>
+                <th class="cell100 column9"><span class="ml-3">Bank Country</span></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div class="table100-body js-pscroll">
+          <table>
+            <tbody>
+              <tr class="row100 body" *ngFor="let item of myData | filter:term; index as i">
+                <ng-container *ngIf="i<total">
+                  <td class="cell100 column1">{{item.name}}</td>
+                  <td class="cell100 column1">{{item.City}}</td>
+                  <td class="cell100 column1">{{item.country}}</td>
+                  <td class="cell100 column1">{{item.email}}</td>
+                  <td class="cell100 column1">{{item.ibn}}</td>
+                  <td class="cell100 column1">{{item.swift}}</td>
+                  <td class="cell100 column1">{{item.bankcountry}}</td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row text-center mt-3 para-text mb-3">
+    <div class="col-lg-4">
+      <label for="cars">Rows per page :</label>
+      <select name="cars" class="rowPer" (change)="onSelect($event)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+    <div class="col-lg-4">
+     <p>1-10 of 109</p>
+    </div>
+    <div class="col-lg-4">
+      <p style="letter-spacing: 5px;"><1 2 3 4 ....22></p>
+     </div>
+  </div>
+</div>
