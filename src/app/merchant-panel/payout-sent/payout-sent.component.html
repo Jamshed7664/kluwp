@@ -1,20 +1,20 @@
 <div class="myNav">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-3 col-sm-12 text-center">
+      <div class="col-lg-3 col-sm-12">
     <button class="filterBtn ml-2 mt-2 ngx-daterangepicker-action left"  (click)="openDatepicker()" type="button">
-      <i class="fas fa-filter"></i> Filter
+      <img src="../../../assets/img/filter.png" width="15" height="15" alt=""> Filter
     </button>
       </div>
-      <div class="col-lg-7 col-sm-12 text-center">
+      <div class="col-lg-6 col-sm-12 text-center">
         <form >
           <i class="fas fa-search"></i>
           <input type="text"  [(ngModel)]="term" name="term" class="searchinput " placeholder="Enter data to search beneficiaries...">
         </form>
       </div>
-      <div class="col-lg-2 col-sm-12 text-center">
-        <img src="../../../assets/img/pdf.png" width="76" height="40" class="" alt="">
-        <img src="../../../assets/img/csv.png" class="" alt="" style="width: 39px; object-fit: contain;">
+      <div class="col-lg-3 col-sm-12 text-right">
+        <img src="../../../assets/img/pdf.png" style="width: 39px; object-fit: contain;" class="" alt="">
+        <img src="../../../assets/img/csv.png" class="ml-2" alt="" style="width: 39px; object-fit: contain;">
       </div>
     </div>
   </div>

@@ -5,6 +5,36 @@
 
 }
 *{
+  overflow: hidden;
+}
+.modal-content{
+width: 374px !important;
+border-top-left-radius: calc(0.9rem - 1px) !important;
+border-top-right-radius: calc(0.9rem - 1px) !important;
+}
+.modal-header{
+  background-color: #5BBB64 !important;
+}
+.modal-header {
+  border-top-left-radius: calc(0.8rem - 1px) !important;
+  border-top-right-radius: calc(0.8rem - 1px) !important;
+}
+.fa-times{
+  background: white;
+  padding: 4px;
+  border-radius: 3px;
+}
+.checkBoxLabel{
+  font-size: 15px;
+    font-weight: bold;
+    margin-top: -2px;
+}
+#exampleModalLongTitle{
+  position: relative;
+  left: 8em;
+  color: white;
+}
+.container-fluid{
   margin: 0;
   padding: 0;
 }

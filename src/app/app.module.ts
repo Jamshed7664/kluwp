@@ -21,6 +21,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesModule } from './pages/pages.module';
 import { MerchantPanelModule } from './merchant-panel/merchant-panel.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { MerchantPanelModule } from './merchant-panel/merchant-panel.module';
     FormsModule,
     ReactiveFormsModule,
     PagesModule,
-    MerchantPanelModule
+    MerchantPanelModule,
+    NgxSpinnerModule
+
   ],
   providers: [
     {

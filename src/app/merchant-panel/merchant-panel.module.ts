@@ -19,6 +19,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 // import {NgxDaterangepickerMd} from 'ngx-daterangepicker-materia
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [DashboardComponent, PayoutSentComponent, BeneficiariesComponent, FinancialTransactionsComponent],
   imports: [
@@ -36,7 +37,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     BsDatepickerModule.forRoot(),
     Ng2SearchPipeModule,
     NgxPaginationModule,
-    NgxDaterangepickerMd.forRoot()
+    NgxDaterangepickerMd.forRoot(),
+    NgxSpinnerModule
   ]
 })
 export class MerchantPanelModule { }

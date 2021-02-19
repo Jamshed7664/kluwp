@@ -1,3 +1,4 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-fade" [fullScreen] = "true"><p style="color: white" > Signing in... </p></ngx-spinner>
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-8 col-sm-12 col-12 col-xl-8 col-md-8">
@@ -9,38 +10,102 @@
       </div>
     </div>
     <div class="col-lg-4 col-sm-12 col-12 col-xl-4 col-md-4 pl-5 pt-5">
-      <h2 class="login-text">Login</h2>
-      <p class="login-para mt-2">Login with your data that you have been provided with.</p>
-      <form class="mt-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group ">
-          <label for="">Enter Username</label>
-          <input [type]="inputType ? 'password' : 'text'" formControlName="email" class="form-control mt-1">
-          <i class="fas fa-eye eye-close" (click)="showUser()" *ngIf="inputType"></i>
-          <i class="fas fa-eye-slash eye-slash-first" (click)="showUser()" *ngIf="!inputType"></i>
+      <ng-container *ngIf="login">
+        <h2 class="login-text">Login</h2>
+        <p class="login-para mt-2">Login with your data that you have been provided with.</p>
+        <form class="mt-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group ">
+            <label for="">Enter Username</label>
+            <input [type]="inputType ? 'password' : 'text'" formControlName="email" class="form-control mt-1">
+            <i class="fas fa-eye eye-close" (click)="showUser()" *ngIf="inputType"></i>
+            <i class="fas fa-eye-slash eye-slash-first" (click)="showUser()" *ngIf="!inputType"></i>
+            <small class="text-danger" *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
+              <span *ngIf="loginForm.controls['email'].errors.required">Please input email</span>
+              <span *ngIf="loginForm.controls['email'].errors.email">Please input valid email</span>
+            </small>
 
-        </div>
-        <div class="form-group mt-4">
-          <label for="">Enter Password</label>
-          <input [type]="inputTypePass ? 'password' : 'text'"  formControlName="password"  class="form-control mt-1">
-          <i class="fas fa-eye eye-close" (click)="showPassword()" *ngIf="inputTypePass"></i>
-          <i class="fas fa-eye-slash eye-slash-first" (click)="showPassword()" *ngIf="!inputTypePass"></i>
-        </div>
-        <div class="custom-control custom-checkbox my-3 ml-4">
-          <input type="checkbox" class="custom-control-input" id="customControlInline">
-          <label class="custom-control-label" for="customControlInline">Remember Me</label>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="submit-btn">Submit</button>
-        </div>
-       <div class="col-12 mt-3">
-        <div class="d-flex justify-content-between " style="width: 90%;">
-          <p><u>Forgot Username?</u></p>
-          <p ><u>Forgot Password?</u></p>
-       </div>
-       </div>
-      </form>
+          </div>
+          <div class="form-group mt-3">
+            <label for="">Enter Password</label>
+            <input [type]="inputTypePass ? 'password' : 'text'"  formControlName="password"  class="form-control mt-1">
+            <i class="fas fa-eye eye-close" (click)="showPassword()" *ngIf="inputTypePass"></i>
+            <i class="fas fa-eye-slash eye-slash-first" (click)="showPassword()" *ngIf="!inputTypePass"></i>
+            <small class="text-danger" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+              Please input password
+            </small>
+          </div>
+          <div >
+            <input type="checkbox"  id="customControlInline" style="zoom: 1.3;">
+            <label class="custom-control-label checkBoxLabel ml-2" for="customControlInline">Remember Me</label>
+          </div>
+          <div class="form-group mt-4">
+            <button type="submit" class="submit-btn">Submit</button>
+          </div>
+         <div class="col-12 mt-3">
+          <div class="d-flex justify-content-between " style="width: 90%;">
+            <p (click)="onForgetUserName()"><u>Forgot Username?</u></p>
+            <p (click)="onForgetPassword()" ><u>Forgot Password?</u></p>
+         </div>
+         </div>
+        </form>
+      </ng-container>
+      <ng-container *ngIf="isForgetPass">
+        <h2 class="login-text mt-3">Forgot Password</h2>
+        <p class="login-para mt-2">We will send a link to reset your password onto the registered mail address.</p>
+        <form class="mt-5" [formGroup]="forgetPassForm" (ngSubmit)="onSubmitForgetPass()">
+          <div class="form-group ">
+            <label for="">Enter Email</label>
+            <input [type]="inputTypeForgetPass ? 'password' : 'text'" formControlName="email" class="form-control mt-1">
+            <i class="fas fa-eye eye-close" (click)="showForgetPassword()" *ngIf="inputTypeForgetPass" ></i>
+            <i class="fas fa-eye-slash eye-slash-first" (click)="showForgetPassword()" *ngIf="!inputTypeForgetPass"></i>
+            <small class="text-danger" *ngIf="forgetPassForm.get('email').invalid && forgetPassForm.get('email').touched">
+              <span *ngIf="forgetPassForm.controls['email'].errors.required">Please input email</span>
+              <span *ngIf="forgetPassForm.controls['email'].errors.email">Please input valid email</span>
+            </small>
+          </div>
+          <div class="form-group mt-5">
+            <button type="submit" class="submit-btn">Send Link</button>
+          </div>
+        </form>
+      </ng-container>
+      <ng-container *ngIf="isForgetUser">
+        <h2 class="login-text mt-3">Forgot Username</h2>
+        <p class="login-para mt-2">We will send a link to reset your password onto the registered mail address.</p>
+        <form class="mt-5" [formGroup]="forgetUserForm" (ngSubmit)="onSubmitForgetUser()">
+          <div class="form-group ">
+            <label for="">Enter Email</label>
+            <input [type]="inputTypeForgetPass ? 'password' : 'text'" formControlName="email" class="form-control mt-1">
+            <i class="fas fa-eye eye-close" (click)="showForgetPassword()" *ngIf="inputTypeForgetPass" ></i>
+            <i class="fas fa-eye-slash eye-slash-first" (click)="showForgetPassword()" *ngIf="!inputTypeForgetPass"></i>
+            <small class="text-danger" *ngIf="forgetUserForm.get('email').invalid && forgetUserForm.get('email').touched">
+              <span *ngIf="forgetUserForm.controls['email'].errors.required">Please input email</span>
+              <span *ngIf="forgetUserForm.controls['email'].errors.email">Please input valid email</span>
+            </small>
+          </div>
+          <div class="form-group mt-5">
+            <button type="submit" class="submit-btn">Send Link</button>
+          </div>
+        </form>
+      </ng-container>
+
     </div>
 
   </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title text-center" id="exampleModalLongTitle">Successful!</h6>
+        <i class="fas fa-times" data-dismiss="modal"></i>
+      </div>
+      <div class="modal-body">
+        <img src="../../assets/img/successful.svg" class="d-block mx-auto" width="50" height="50" alt="">
+       <p class="text-center mt-3"> Link send successfully</p>
+      </div>
+    </div>
+  </div>
+</div>
