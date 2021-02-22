@@ -20,6 +20,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 // import {NgxDaterangepickerMd} from 'ngx-daterangepicker-materia
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [DashboardComponent, PayoutSentComponent, BeneficiariesComponent, FinancialTransactionsComponent],
   imports: [
@@ -34,11 +35,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    BsDatepickerModule.forRoot(),
     Ng2SearchPipeModule,
     NgxPaginationModule,
     NgxDaterangepickerMd.forRoot(),
-    NgxSpinnerModule
-  ]
+    NgxSpinnerModule,
+    ModalModule,
+    BsDatepickerModule.forRoot()
+  ],
+  providers :[BsModalService]
 })
 export class MerchantPanelModule { }

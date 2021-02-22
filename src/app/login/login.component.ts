@@ -1,8 +1,10 @@
+import { TemplateRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import * as $ from 'jquery'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -11,7 +13,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor( private fb:FormBuilder,private router:Router, private toastr:ToastrService,private spinner: NgxSpinnerService) { }
+  constructor( private fb:FormBuilder,
+    private router:Router,
+     private toastr:ToastrService,
+     private spinner: NgxSpinnerService,
+     private modalService: BsModalService
+     ) { }
 loginForm :any;
 forgetPassForm:any;
 forgetUserForm:any;
@@ -20,8 +27,9 @@ inputTypePass = true
 login:boolean = true;
 isForgetPass:boolean = false;
 isForgetUser:boolean = false;
-inputTypeForgetPass:boolean =true
-display:string ="none"
+inputTypeForgetPass:boolean =true;
+display:string ="none";
+modalRef: BsModalRef;
   ngOnInit(): void {
 
     this.initializeForm();
@@ -52,6 +60,20 @@ display:string ="none"
   showPassword(){
     this.inputTypePass=!this.inputTypePass;
   }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      { class: 'modal-dialog-centered',
+      ignoreBackdropClick: true,
+      keyboard: false
+    });
+ }
+ getModaleRef(template:any){
+this.template =template;
+ }
+ closeModal(){
+  this.modalRef.hide()
+ }
   // For Forget pass
   showForgetPassword(){
  this.inputTypeForgetPass=!this.inputTypeForgetPass;
@@ -69,16 +91,20 @@ onForgetUserName(){
   this.login = false;
   this.isForgetPass = false;
 }
+template:any;
   onSubmit(){
-    this.spinner.show();
-
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 5000);
     if(this.loginForm.invalid){
       this.toastr.error("Please input email and password")
     }else{
-      this.router.navigate(['/dashboard'])
+      this.spinner.show();
+      setTimeout(() => {
+        this.spinner.hide();
+        this.openModal(this.template)
+        setTimeout(() => {
+          this.closeModal()
+          this.router.navigate(['/dashboard'])
+        }, 2000);
+      }, 5000);
     }
     console.log(this.loginForm.value);
   }

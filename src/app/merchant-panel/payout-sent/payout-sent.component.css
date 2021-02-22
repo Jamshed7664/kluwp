@@ -40,12 +40,21 @@
 
 
 * {
-	margin: 0px;
-	padding: 0px;
+	/* margin: 0px;
+	padding: 0px; */
 	box-sizing: border-box;
 }
 
+::ng-deep .theme-green .bs-datepicker-head {
+  background-color: #FA7D18 !important;
+}
 
+::ng-deep .bs-datepicker-body table td span.selected, .bs-datepicker-body table td.selected span {
+  background-color: #FA7D18 !important;
+}
+::ng-deep .bs-datepicker-container {
+  padding: 0 !important;
+}
 
 /* ------------------------------------ */
 a {

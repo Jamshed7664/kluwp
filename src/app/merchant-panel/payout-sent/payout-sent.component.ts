@@ -1,7 +1,8 @@
-import { AfterViewInit } from '@angular/core';
+import { AfterViewInit, TemplateRef } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as moment from 'moment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 
 @Component({
@@ -11,6 +12,13 @@ import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 })
 export class PayoutSentComponent implements OnInit {
   @ViewChild(DaterangepickerDirective, { static: false }) pickerDirective: DaterangepickerDirective;
+  modalRef: BsModalRef;
+  bsValue = new Date();
+  bsRangeValue: Date[];
+  maxDate = new Date();
+  minDate = new Date();
+  disabledDates:any;
+  enabledDates:any
 
   openDatepicker() {
     this.pickerDirective.open();
@@ -19,6 +27,17 @@ export class PayoutSentComponent implements OnInit {
 console.log('in changes',event);
 
   }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      { class: 'modal-dialog-centered',
+      ignoreBackdropClick: true,
+      keyboard: false
+    });
+    setTimeout(() => {
+      this.modalRef.hide()
+    }, 5000);
+ }
 
   term:any;
   p:any=1;
@@ -26,9 +45,13 @@ console.log('in changes',event);
   totalLength:number =0;
   selected:any=null;
   makes: any[] = [];
-  constructor() {
-    this.makes = [];
-   }
+
+    constructor(private modalService: BsModalService) {
+      this.minDate.setDate(this.minDate.getDate() - 1);
+      this.maxDate.setDate(this.maxDate.getDate() + 7);
+      this.bsRangeValue = [this.bsValue, this.maxDate];
+    }
+
    config = {
     itemsPerPage: 7,
     currentPage: 1,

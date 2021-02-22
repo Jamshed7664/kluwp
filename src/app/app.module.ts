@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesModule } from './pages/pages.module';
 import { MerchantPanelModule } from './merchant-panel/merchant-panel.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
@@ -48,14 +49,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     PagesModule,
     MerchantPanelModule,
-    NgxSpinnerModule
-
+    NgxSpinnerModule,
+    ModalModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi: true
-    }
-
+    },
+    BsModalService
   ],
   bootstrap: [AppComponent]
 })
